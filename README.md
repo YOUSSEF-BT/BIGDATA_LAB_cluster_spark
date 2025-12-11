@@ -1,9 +1,49 @@
-# 🚀 TP BIG DATA - Cluster Hadoop, YARN & Spark avec Google Colab
+# 📘 TP BIG DATA - Cluster Spark avec Docker, Hadoop, YARN et MongoDB Atlas
 
-## 📋 Description complète
-Ce TP a pour objectif de mettre en place un cluster Big Data complet avec Docker, incluant Hadoop HDFS, YARN et Spark, et d'effectuer des analyses de données avec PySpark sur Google Colab.
+## 📋 Description
+TP réalisé dans le cadre du cours de Big Data (Année Universitaire 2025-2026). 
+Ce TP a pour objectif de mettre en place un cluster Big Data complet avec Docker, incluant Hadoop HDFS, YARN, Spark, et d'effectuer des analyses de données avec PySpark sur Google Colab avec intégration MongoDB Atlas.
 
-## 📸 Captures d'écran des interfaces
+## 🎯 Objectifs du TP
+- ❖ Installer un cluster Spark avec Docker
+- ❖ Exécuter des premiers exemples sur Apache Spark
+- ❖ Installer PySpark sur Google Colab
+- ❖ Charger et manipuler des données avec Spark
+- ❖ Étude de cas : Intégration de Spark avec MongoDB Atlas
+- ❖ Visualisation des résultats avec Matplotlib et Seaborn
+
+---
+
+## 📁 Structure du Projet
+```
+BIGDATA_LAB_cluster_spark/
+├── README.md                           # Documentation principale
+├── screenshots/                        # Captures d'écran des interfaces
+│   ├── hadoop/hadoop.png              # Interface Hadoop HDFS
+│   ├── yarn/Yarn.png                  # Interface YARN ResourceManager
+│   └── spark/Spark.png                # Interface Spark Master
+├── colab_notebooks/                    # Notebooks Google Colab
+│   └── TP_Cluster_spark_colab.ipynb   # Notebook principal avec analyses
+├── docker_config/                      # Fichiers de configuration Docker
+│   ├── docker-compose.yml             # Configuration du cluster
+│   ├── spark-defaults.conf            # Configuration Spark
+│   └── start-scripts/                 # Scripts de démarrage
+├── data/                               # Jeux de données utilisés
+│   └── transactions.csv               # Données de transactions financières
+├── scripts/                            # Scripts utilitaires
+│   ├── start-cluster.sh               # Script de démarrage du cluster
+│   └── submit-jobs.sh                 # Soumission de jobs Spark
+├── examples/                           # Exemples de code
+│   ├── wordcount.py                   # Exemple WordCount Python
+│   ├── sparkpi.py                     # Calcul de Pi avec Spark
+│   └── mongodb-integration.py         # Intégration MongoDB
+└── documentation/                      # Documentation complémentaire
+    └── lab_cluster_spark_25-26.pdf    # Énoncé du TP
+```
+
+---
+
+## 📸 Captures d'écran des Interfaces
 
 ### 1. Interface Hadoop HDFS NameNode
 ![Hadoop HDFS Interface](screenshots/hadoop/hadoop.png)
@@ -17,27 +57,48 @@ Ce TP a pour objectif de mettre en place un cluster Big Data complet avec Docker
 ![Spark Master Interface](screenshots/spark/Spark.png)
 *Spark Master avec les workers connectés et les applications en cours d'exécution*
 
-## 🔬 Partie Google Colab - Analyses PySpark
+---
+
+## 🔬 Notebook Google Colab - Analyses PySpark avec MongoDB
 
 ### Notebook d'analyse disponible :
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUSSEF-BT/BIGDATA_LAB_cluster_spark/blob/main/colab_notebooks/TP_Cluster_spark_colab.ipynb)
 
-### 📓 Notebook principal : `TP_Cluster_spark_colab.ipynb`
+### 📓 Contenu du Notebook Principal : `TP_Cluster_spark_colab.ipynb`
 
-**Contenu du notebook :**
-1. **Installation et configuration** de PySpark sur Google Colab
-2. **Création de session Spark** pour le traitement distribué
-3. **Analyse de données** de transactions financières
-4. **Transformations Spark** : filtrage, agrégations, jointures
-5. **Visualisation** des résultats avec Matplotlib/Seaborn
+**Partie 1 : Installation et Configuration**
+1. Installation d'Apache Spark et PySpark sur Colab
+2. Configuration des variables d'environnement (JAVA_HOME, SPARK_HOME)
+3. Démarrage d'une session Spark
 
-**Technologies utilisées :**
-- PySpark 3.5.0
-- Google Colab
-- Pandas, Matplotlib, Seaborn
-- Spark DataFrames
+**Partie 2 : Premiers Exemples avec Spark**
+- Création de DataFrames simples
+- Opérations de base (sélection, filtrage, schéma)
+- Vérification de la version de Spark
 
-## 🏗️ Architecture du cluster déployé
+**Partie 3 : Analyse de Données de Transactions Financières**
+- Chargement de fichiers CSV
+- Exploration et manipulation des données
+- Filtrage des transactions supérieures à 1000€
+- Calcul du montant total par type de transaction
+- Tri des transactions par montant décroissant
+
+**Partie 4 : Intégration avec MongoDB Atlas**
+- Installation du connecteur MongoDB Spark
+- Configuration de la connexion à MongoDB Atlas
+- Chargement des transactions depuis MongoDB
+- Analyses avancées avec les données MongoDB
+- Utilisation de Spark SQL pour les requêtes
+
+**Partie 5 : Visualisation des Résultats**
+- Graphique barplot : Montant total des transactions par type
+- Histogramme : Distribution des montants des transactions
+- Comparaison des transactions réussies vs échouées
+- Visualisations avec Seaborn et Matplotlib
+
+---
+
+## 🏗️ Architecture du Cluster Déployé
 
 ```
 ┌─────────────────────────────────────────┐
@@ -63,161 +124,261 @@ Ce TP a pour objectif de mettre en place un cluster Big Data complet avec Docker
 │  ┌─────────────────────────────┐        │
 │  │  Notebook PySpark           │        │
 │  │  - Analyse de données       │        │
+│  │  - Connexion MongoDB Atlas  │        │
 │  │  - Visualisations           │        │
+│  └─────────────────────────────┘        │
+└─────────────────────────────────────────┘
+         │
+         ▼
+┌─────────────────────────────────────────┐
+│        MongoDB Atlas (Cloud)            │
+│  ┌─────────────────────────────┐        │
+│  │  Base de données            │        │
+│  │  bankdb.transactions        │        │
+│  │  Collections NoSQL          │        │
 │  └─────────────────────────────┘        │
 └─────────────────────────────────────────┘
 ```
 
-## 🔧 Travail réalisé
+---
 
-### Phase 1 : Installation et configuration Docker
-- **Docker Compose** : Définition des services (Hadoop, YARN, Spark)
-- **Réseau** : Configuration de la communication entre conteneurs
-- **Volumes** : Persistance des données HDFS
+## 🔧 Travail Réalisé
+
+### Phase 1 : Installation du Cluster avec Docker
+- **Docker Compose** : Configuration complète des services
 - **Services déployés** :
   - Hadoop NameNode (port 9870)
-  - YARN ResourceManager (port 8088)  
+  - YARN ResourceManager (port 8088)
   - Spark Master (port 8080)
   - 2x Spark Workers / YARN NodeManagers
   - 2x Hadoop DataNodes
+- **Scripts de démarrage** : `start-hadoop.sh`, `start-spark.sh`
 
-### Phase 2 : Configuration des composants
+### Phase 2 : Configuration et Tests
 - **Hadoop HDFS** : Configuration avec réplication (facteur 2)
 - **YARN** : Allocation des ressources (mémoire, CPU)
-- **Spark** : Intégration avec YARN comme gestionnaire de ressources
-- **Environnement** : Variables d'environnement et fichiers de configuration
+- **Spark** : Intégration avec YARN comme cluster manager
+- **Tests de fonctionnement** : Accès aux interfaces web, soumission de jobs
 
-### Phase 3 : Analyses sur Google Colab
-- **Installation PySpark** : Configuration sur l'environnement Colab
-- **Session Spark** : Création et configuration
-- **Traitement de données** : Opérations sur DataFrames Spark
-- **Visualisation** : Génération de graphiques
+### Phase 3 : Premiers Exemples Spark
+1. **SparkPi** : Calcul de π avec différentes valeurs
+   ```bash
+   spark-submit --class org.apache.spark.examples.SparkPi \
+                --master local[*] \
+                $SPARK_HOME/examples/jars/spark-examples_{version}.jar 100
+   ```
 
-### Phase 4 : Tests et validation
-- ✅ Accès aux 3 interfaces web (Hadoop, YARN, Spark)
-- ✅ Communication entre tous les services
-- ✅ Soumission de jobs Spark sur YARN
-- ✅ Exécution du notebook sur Colab
-- ✅ Traitement et analyse de données
+2. **WordCount en Scala** : Comptage de mots dans un fichier texte
+   ```scala
+   val data = sc.textFile("hdfs://hadoop-master:9000/user/root/input/alice.txt")
+   val count = data.flatMap(line => line.split(" "))
+                   .map(word => (word, 1))
+                   .reduceByKey(_+_)
+   count.saveAsTextFile("hdfs://hadoop-master:9000/user/root/output/respark")
+   ```
 
-## 📊 Commandes exécutées
+3. **WordCount en Python** : Version Python du comptage de mots
+   ```python
+   spark = SparkSession.builder.master("yarn").appName('wordcount').getOrCreate()
+   data = spark.sparkContext.textFile("hdfs://hadoop-master:9000/user/root/input/alice.txt")
+   words = data.flatMap(lambda line: line.split(" "))
+   wordCounts = words.map(lambda word: (word, 1)).reduceByKey(lambda a,b:a +b)
+   wordCounts.saveAsTextFile("hdfs://hadoop-master:9000/user/root/output/rr2")
+   ```
 
+### Phase 4 : Installation PySpark sur Google Colab
+- **Installation des dépendances** : Java 8, Spark 3.2.1, PySpark
+- **Configuration environnement** : Variables JAVA_HOME, SPARK_HOME
+- **Initialisation Spark** : Utilisation de findspark pour l'initialisation
+- **Session Spark** : Création d'une session avec configuration mémoire
+
+### Phase 5 : Analyse de Données avec Spark
+- **Chargement CSV** : Données de transactions financières
+- **Manipulation DataFrames** : Filtrage, regroupement, tri
+- **Transformations** : Opérations sur les colonnes, agrégations
+- **Schéma** : Analyse de la structure des données
+
+### Phase 6 : Intégration MongoDB Atlas (Étude de Cas)
+- **Connecteur MongoDB Spark** : Installation et configuration
+- **Connexion à MongoDB Atlas** : URI de connexion sécurisée
+- **Chargement des données** : Lecture des collections MongoDB dans Spark
+- **Analyses avec données MongoDB** :
+  - Calcul du montant moyen des transactions par type
+  - Identification des comptes avec plus de 5 transactions
+  - Agrégations complexes avec Spark SQL
+- **Configuration de sécurité** : Gestion des identifiants et permissions
+
+### Phase 7 : Visualisation des Résultats
+- **Graphiques avec Seaborn** : Barplots, histogrammes, comparaisons
+- **Analyse statistique** : Distribution des montants, taux de réussite
+- **Export des résultats** : Conversion Pandas pour visualisation
+- **Dashboard** : Vue d'ensemble des transactions
+
+### Phase 8 : Tests et Validation
+- ✅ Accès aux interfaces web (Hadoop:9870, YARN:8088, Spark:8080)
+- ✅ Communication entre tous les services Docker
+- ✅ Soumission réussie de jobs Spark (SparkPi, WordCount)
+- ✅ Connexion à MongoDB Atlas depuis Spark
+- ✅ Lecture/écriture de données dans MongoDB
+- ✅ Exécution complète du notebook sur Google Colab
+- ✅ Génération des visualisations
+
+---
+
+## 📊 Commandes Principales Exécutées
+
+### 1. Accès et Démarrage du Cluster
 ```bash
-# 1. Démarrer le cluster
-docker-compose up -d
+# Accéder au conteneur master
+docker exec -it hadoop-master bash
 
-# 2. Vérifier l'état des services
-docker-compose ps
+# Démarrer Hadoop et YARN
+./start-hadoop.sh
+./start-spark.sh
 
-# 3. Tester Hadoop HDFS
-hdfs dfsadmin -report
-hdfs dfs -ls /
+# Vérifier les services
+jps
+```
 
-# 4. Tester YARN
-yarn node -list
-yarn application -list
+### 2. Interfaces Web
+- **YARN Web UI** : https://localhost:8088
+- **Spark Web UI** : https://localhost:8080
+- **Hadoop HDFS UI** : https://localhost:9870
 
-# 5. Soumettre un job Spark
-spark-submit --master yarn --deploy-mode cluster app.py
+### 3. Soumission de Jobs Spark
+```bash
+# Exemple SparkPi
+spark-submit --class org.apache.spark.examples.SparkPi \
+             --master yarn \
+             $SPARK_HOME/examples/jars/spark-examples_*.jar 100
 
-# 6. Accéder aux interfaces web
-# Hadoop  : http://localhost:9870
-# YARN    : http://localhost:8088  
-# Spark   : http://localhost:8080
+# WordCount Python
+spark-submit --master yarn wordcount.py
+```
 
-# 7. Arrêter le cluster
+### 4. Installation sur Google Colab
+```python
+# Installation des dépendances
+!apt-get install openjdk-8-jdk-headless -qq > /dev/null
+!wget -q https://dlcdn.apache.org/spark/spark-3.2.1/spark-3.2.1-bin-hadoop3.2.tgz
+!tar xf spark-3.2.1-bin-hadoop3.2.tgz
+!pip install -q findspark pyspark py4j pymongo matplotlib seaborn
+
+# Configuration environnement
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-8-openjdk-amd64"
+os.environ["SPARK_HOME"] = "/content/spark-3.2.1-bin-hadoop3.2"
+import findspark
+findspark.init()
+
+# Session Spark
+from pyspark.sql import SparkSession
+spark = SparkSession.builder \
+    .appName("ColabSpark") \
+    .config("spark.driver.memory", "2g") \
+    .getOrCreate()
+```
+
+### 5. Intégration MongoDB Atlas
+```python
+# Configuration connexion MongoDB
+mongo_uri = "mongodb+srv://<username>:<password>@cluster0.mongodb.net/bankdb.transactions?retryWrites=true&w=majority"
+
+# Session Spark avec MongoDB
+spark = SparkSession.builder \
+    .appName("MongoDBIntegration") \
+    .config("spark.mongodb.input.uri", mongo_uri) \
+    .config("spark.mongodb.output.uri", mongo_uri) \
+    .getOrCreate()
+
+# Chargement des données depuis MongoDB
+df_mongo = spark.read.format("mongo").option("uri", mongo_uri).load()
+```
+
+### 6. Arrêt du Cluster
+```bash
+# Arrêter les conteneurs
+docker stop hadoop-master hadoop-slave1 hadoop-slave2
+
+# Ou utiliser docker-compose
 docker-compose down
 ```
 
-## 📁 Structure du projet
+---
 
-```
-BIGDATA_LAB_cluster_spark/
-├── README.md                           # Documentation principale
-├── docker-compose.yml                  # Configuration du cluster Docker
-├── spark-defaults.conf                 # Configuration Spark
-├── screenshots/                        # Captures d'écran
-│   ├── hadoop/hadoop.png              # Interface Hadoop
-│   ├── yarn/Yarn.png                  # Interface YARN
-│   └── spark/Spark.png                # Interface Spark
-├── colab_notebooks/                    # Notebooks Google Colab
-│   └── TP_Cluster_spark_colab.ipynb   # Notebook principal PySpark
-├── docker_config/                      # Fichiers de configuration avancés
-├── notebooks/                          # Notebooks locaux
-├── scripts/                            # Scripts utilitaires
-│   └── start_cluster.sh               # Script de démarrage
-├── data/                               # Jeux de données
-└── .gitignore                         # Fichiers ignorés par Git
-```
-
-## ✅ Validation technique
-
-| Service | Port | Statut | Commentaire |
-|---------|------|--------|-------------|
-| Hadoop NameNode | 9870 | ✅ Opérationnel | Interface HDFS accessible |
-| YARN ResourceManager | 8088 | ✅ Opérationnel | Gestion des ressources active |
-| Spark Master | 8080 | ✅ Opérationnel | 2 workers connectés |
-| Hadoop DataNodes | 9864 | ✅ Opérationnel | 2 nodes disponibles |
-| Spark History Server | 18080 | ✅ Opérationnel | Historique des jobs |
-
-**Paramètres de configuration :**
-- **Mémoire totale** : 4 GB RAM
-- **Cœurs CPU** : 4
-- **Stockage HDFS** : 100 GB (répliqué x2)
-- **Facteur de réplication HDFS** : 2
-- **Workers Spark** : 2 instances
-
-## 🎓 Apprentissages et compétences acquises
+## 🎓 Compétences Acquises
 
 ### Techniques
-1. **Orchestration Docker** : Gestion de clusters multi-conteneurs avec docker-compose
-2. **Architecture Hadoop** : Compréhension de l'écosystème HDFS + YARN
-3. **Spark sur YARN** : Exécution de jobs Spark via le gestionnaire de ressources YARN
-4. **Traitement distribué** : Utilisation de PySpark pour l'analyse de données à grande échelle
-5. **Monitoring** : Utilisation des interfaces web pour le suivi des services
+1. **Orchestration Docker** : Gestion de clusters multi-conteneurs
+2. **Architecture Big Data** : Compréhension HDFS + YARN + Spark
+3. **Spark Distributed Computing** : Traitement distribué de données
+4. **PySpark Programming** : Développement d'applications Spark en Python
+5. **MongoDB Integration** : Connexion Spark à bases de données NoSQL
+6. **Data Visualization** : Création de graphiques avec Seaborn/Matplotlib
+7. **Cloud Integration** : Utilisation de Google Colab et MongoDB Atlas
 
 ### Pratiques
-- Configuration réseau entre conteneurs Docker
-- Allocation dynamique des ressources avec YARN
-- Gestion des volumes persistants pour HDFS
-- Débogage de services distribués
-- Intégration entre environnement local (Docker) et cloud (Google Colab)
+- Configuration et optimisation de clusters Spark
+- Débogage d'applications distribuées
+- Gestion de la mémoire et des ressources
+- Sécurisation des connexions aux bases de données
+- Automatisation des déploiements avec Docker
+- Analyse de performances des jobs Spark
 
-## 🚀 Démarrage rapide
+---
 
-### Pour le cluster Docker :
-```bash
-# Cloner le dépôt
-git clone https://github.com/YOUSSEF-BT/BIGDATA_LAB_cluster_spark.git
-cd BIGDATA_LAB_cluster_spark
+## 📈 Résultats et Visualisations
 
-# Démarrer le cluster
-docker-compose up -d
+### 1. Montant Total des Transactions par Type
+![Transactions par Type](screenshots/results/transactions_by_type.png)
+*Graphique barplot montrant la répartition des montants par type de transaction*
 
-# Accéder aux interfaces :
-# - Hadoop:  http://localhost:9870
-# - YARN:    http://localhost:8088
-# - Spark:   http://localhost:8080
-```
+### 2. Distribution des Montants des Transactions
+![Distribution Montants](screenshots/results/amount_distribution.png)
+*Histogramme montrant la distribution des montants des transactions*
 
-### Pour les analyses Colab :
-1. Cliquez sur le badge [![Open In Colab]](https://colab.research.google.com/github/YOUSSEF-BT/BIGDATA_LAB_cluster_spark/blob/main/colab_notebooks/TP_Cluster_spark_colab.ipynb)
-2. Exécutez les cellules du notebook dans l'ordre
-3. Les résultats s'afficheront directement dans Colab
+### 3. Transactions Réussies vs Échouées
+![Statut Transactions](screenshots/results/transaction_status.png)
+*Comparaison du nombre de transactions réussies et échouées*
+
+### 4. Résultats WordCount
+![WordCount Results](screenshots/results/wordcount_results.png)
+*Exemple de résultats du comptage de mots sur le fichier Alice.txt*
+
+---
+
+## 🔗 Liens Utiles
+
+### Documentation Officielle
+- [Apache Spark Documentation](https://spark.apache.org/docs/latest/)
+- [Hadoop Documentation](https://hadoop.apache.org/docs/current/)
+- [YARN Documentation](https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html)
+- [MongoDB Spark Connector](https://www.mongodb.com/docs/spark-connector/current/)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+
+### Ressources du TP
+- [Notebook Colab](https://colab.research.google.com/github/YOUSSEF-BT/BIGDATA_LAB_cluster_spark/blob/main/colab_notebooks/TP_Cluster_spark_colab.ipynb)
+- [Énoncé du TP (PDF)](documentation/lab_cluster_spark_25-26.pdf)
+- [Dépôt GitHub](https://github.com/YOUSSEF-BT/BIGDATA_LAB_cluster_spark)
+
+---
 
 ## 👨‍💻 Auteur
 **Youssef Bouzit**  
 Étudiant en Data Science  
-Année universitaire 2025/2026
+Année Universitaire 2025-2026
 
 ## 📧 Contact
-- GitHub : [YOUSSEF-BT](https://github.com/YOUSSEF-BT)
-- Dépôt du TP : [BIGDATA_LAB_cluster_spark](https://github.com/YOUSSEF-BT/BIGDATA_LAB_cluster_spark)
+- **GitHub** : [YOUSSEF-BT](https://github.com/YOUSSEF-BT)
+- **Dépôt du TP** : [BIGDATA_LAB_cluster_spark](https://github.com/YOUSSEF-BT/BIGDATA_LAB_cluster_spark)
+- **Notebook Colab** : [Lien Direct](https://colab.research.google.com/github/YOUSSEF-BT/BIGDATA_LAB_cluster_spark/blob/main/colab_notebooks/TP_Cluster_spark_colab.ipynb)
+
+---
 
 ## 📄 Licence
 Ce projet est disponible sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 ---
 
-*Ce TP a été réalisé dans le cadre du cours de Big Data.  
+*Ce TP a été réalisé dans le cadre du cours de Big Data (Année Universitaire 2025-2026) sous la supervision de Yasser El Madani El Alami.  
 L'ensemble du code, configurations et documentations est ouvert et modifiable selon les termes de la licence MIT.*
