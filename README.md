@@ -19,6 +19,8 @@ Mise en place d'un cluster Big Data complet avec Docker, incluant :
 *Spark Master avec les workers connectés et jobs en cours*
 
 ## 🏗️ Architecture déployée
+
+'''
 ┌─────────────────────────────────────┐
 │ Cluster Docker │
 ├─────────────────────────────────────┤
@@ -35,8 +37,7 @@ Mise en place d'un cluster Big Data complet avec Docker, incluant :
 │ │ 8080 │ │ (Workers) │ │
 │ └────────────┘ └────────────┘ │
 └─────────────────────────────────────┘
-
-text
+'''
 
 ## 🔧 Travail réalisé
 
@@ -146,8 +147,8 @@ Gestion des volumes persistants
 Débogage des services distribués
 
 👨‍💻 Auteur
-Youssef Bentaher
-Étudiant en Big Data
+Youssef Bouzit
+Étudiant en Data science
 Année universitaire 2025/2026
 
 Ce TP a été réalisé dans le cadre du cours de Big Data.
