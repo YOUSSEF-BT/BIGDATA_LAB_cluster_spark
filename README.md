@@ -327,26 +327,6 @@ docker-compose down
 
 ---
 
-## 📈 Résultats et Visualisations
-
-### 1. Montant Total des Transactions par Type
-![Transactions par Type](screenshots/results/transactions_by_type.png)
-*Graphique barplot montrant la répartition des montants par type de transaction*
-
-### 2. Distribution des Montants des Transactions
-![Distribution Montants](screenshots/results/amount_distribution.png)
-*Histogramme montrant la distribution des montants des transactions*
-
-### 3. Transactions Réussies vs Échouées
-![Statut Transactions](screenshots/results/transaction_status.png)
-*Comparaison du nombre de transactions réussies et échouées*
-
-### 4. Résultats WordCount
-![WordCount Results](screenshots/results/wordcount_results.png)
-*Exemple de résultats du comptage de mots sur le fichier Alice.txt*
-
----
-
 ## 🔗 Liens Utiles
 
 ### Documentation Officielle
